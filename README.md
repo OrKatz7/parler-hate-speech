@@ -28,8 +28,14 @@ export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 ## How To Run
 ```
 clasic tf-idf - train-tfidf.ipynb
+```
+```
 use back translation - back_translation.ipynb
+```
+```
 train simple NN like Bert, Robereta or Deberta from Hugging Face - train_nn.ipynb
 train all 5 models that we used from Hugging Face - ./run_train.sh
+```
+```
 train a lgbm model on Hugging Face{Bert,Roberta or Deberta} embeddings - stage2train.ipynb
 ```
