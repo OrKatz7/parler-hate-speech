@@ -1,15 +1,18 @@
 # parler-hate-speech
 ## Install
+clone our repo
 ```
 git clone https://github.com/OrKatz7/parler-hate-speech
 cd parler-hate-speech
 ```
+install fastText
 ```
 git clone https://github.com/facebookresearch/fastText.git
 cd fastText
 pip install .
 cd ..
 ```
+install requirements
 ```
 pip install -U easynmt
 pip install thai-segmenter
@@ -18,6 +21,7 @@ pip install -U iterative-stratification==0.1.7
 pip install -U transformers==4.21.2
 pip install -U tokenizers==0.12.1
 ```
+export
 ```
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 ```
