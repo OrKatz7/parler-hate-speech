@@ -1,0 +1,24 @@
+labels:
+on df 1 of the implicit dataset repo - 21480 posts. 
+1. binary:
+'not_hate' = 0
+'hate' = 1 (of any kind)
+
+2. multi 3:
+'not_hate' = 0
+'implicit_hate' = 1
+'explicit_hate' = 2
+
+on df 2 of the implicit dataset repo - 6346 posts. 
+3. multi 7 (smaller):
+'other' = 0
+'threatening' = 1
+'irony' = 2
+'inferiority' = 3
+'stereotypical' = 4
+'incitement' = 5
+'white_grievance' = 6
+
+
+link to the data:
+https://github.com/SALT-NLP/implicit-hate
