@@ -2,10 +2,11 @@
 ## Install
 ```
 git clone https://github.com/OrKatz7/parler-hate-speech
+cd parler-hate-speech
 git clone https://github.com/facebookresearch/fastText.git
-%cd fastText
+cd fastText
 pip install .
-%cd ..
+cd ..
 pip install -U easynmt
 pip install thai-segmenter
 pip install -U protobuf==3.20.0
