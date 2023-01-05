@@ -16,3 +16,6 @@ pip install -U tokenizers==0.12.1
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 ```
 ## How To Run
+```
+./run_train.sh
+```
