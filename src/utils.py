@@ -54,6 +54,13 @@ def get_score(y_trues, y_preds):
     mcrmse_score, scores = MCRMSE(y_trues, y_preds)
     return mcrmse_score, scores
 
+from sklearn.metrics import roc_auc_score,confusion_matrix
+def get_score_cla(y_trues, y_preds):
+    scores = roc_auc_score(y_trues, y_preds)
+    cm = confusion_matrix(y_trues, y_preds>0.5)
+    print(cm)
+    return -scores , -scores
+
 
 def get_logger(filename="train"):
     from logging import getLogger, INFO, StreamHandler, FileHandler, Formatter
@@ -108,7 +115,7 @@ def asMinutes(s):
     s -= m * 60
     return '%dm %ds' % (m, s)
 
-
+#
 def timeSince(since, percent):
     now = time.time()
     s = now - since
@@ -159,7 +166,7 @@ def train_fn(CFG,fold, train_loader, model, criterion, optimizer, epoch, schedul
     return losses.avg
 
 
-def valid_fn(CFG,valid_loader, model, criterion, device):
+def valid_fn(CFG,valid_loader, model, criterion, device,is_cla=False):
     losses = AverageMeter()
     model.eval()
     preds = []
@@ -180,6 +187,8 @@ def valid_fn(CFG,valid_loader, model, criterion, device):
         if CFG.gradient_accumulation_steps > 1:
             loss = loss / CFG.gradient_accumulation_steps
         losses.update(loss.item(), batch_size)
+        if is_cla:
+            y_preds = y_preds.sigmoid() 
         preds.append(y_preds.to('cpu').numpy())
         EMB.append(sentence_embeddings.to('cpu').numpy())
         end = time.time()
@@ -197,7 +206,7 @@ def valid_fn(CFG,valid_loader, model, criterion, device):
 # ====================================================
 # train loop
 # ====================================================
-def train_loop(CFG,folds, fold,LOGGER,OUTPUT_DIR):
+def train_loop(CFG,folds, fold,LOGGER,OUTPUT_DIR,is_pre_train=False,is_cla = False):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     LOGGER.info(f"========== fold: {fold} training ==========")
 
@@ -208,15 +217,19 @@ def train_loop(CFG,folds, fold,LOGGER,OUTPUT_DIR):
     valid_folds = folds[folds['fold'] == fold].reset_index(drop=True)
     valid_labels = valid_folds[CFG.target_cols].values
     train_labels = train_folds[CFG.target_cols].values
-    train_dataset = TrainDataset(CFG, train_folds)
-    valid_dataset = TrainDataset(CFG, valid_folds)
+    BackTranslation = ['de','es','fr'] if not is_pre_train and CFG.back_translation else None #,'fr','es','nl','no'
+    LOGGER.info(f"BackTranslation {BackTranslation}")
+    
+    train_dataset = TrainDataset(CFG, train_folds , BackTranslation = BackTranslation , stop_BackTranslation_epcoh = 3)
+    train_dataset2 = TrainDataset(CFG, train_folds , BackTranslation = None , stop_BackTranslation_epcoh = 0)
+    valid_dataset = TrainDataset(CFG, valid_folds , BackTranslation = None , stop_BackTranslation_epcoh = 0)
 
     train_loader = DataLoader(train_dataset,
                               batch_size=CFG.batch_size,
                               shuffle=True,
                               num_workers=CFG.num_workers, pin_memory=True, drop_last=True)
     
-    train_val_loader = DataLoader(train_dataset,
+    train_val_loader = DataLoader(train_dataset2,
                               batch_size=CFG.batch_size,
                               shuffle=False,
                               num_workers=CFG.num_workers, pin_memory=True, drop_last=False)
@@ -232,6 +245,10 @@ def train_loop(CFG,folds, fold,LOGGER,OUTPUT_DIR):
     model = CustomModel(CFG, config_path=None, pretrained=True,LOGGER=LOGGER)
     torch.save(model.config, OUTPUT_DIR+'config.pth')
     model.to(device)
+    if not is_pre_train and os.path.exists(OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{0}_pre.pth"):
+        model.load_state_dict(torch.load(OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{0}_pre.pth")['model'])
+        name = OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{0}_pre.pth"
+        LOGGER.info(f"load {name}")
     
     def get_optimizer_params(model, encoder_lr, decoder_lr, weight_decay=0.0):
         param_optimizer = list(model.named_parameters())
@@ -272,40 +289,48 @@ def train_loop(CFG,folds, fold,LOGGER,OUTPUT_DIR):
     # ====================================================
     # loop
     # ====================================================
-    criterion = nn.SmoothL1Loss(reduction='mean') # RMSELoss(reduction="mean")
+    if is_cla:
+        criterion = nn.BCEWithLogitsLoss()
+    else:
+        criterion = nn.SmoothL1Loss(reduction='mean') # RMSELoss(reduction="mean")
     
     best_score = np.inf
-
-    for epoch in range(CFG.epochs):
+    epochs =  1 if is_pre_train else CFG.epochs
+    for epoch in range(epochs):
         if epoch == 0:
             _, _,EMB_train_real = valid_fn(CFG,train_val_loader, model, criterion, device)
-            avg_val_loss, predictions,EMB_real = valid_fn(CFG,valid_loader, model, criterion, device)
+            avg_val_loss, predictions,EMB_real = valid_fn(CFG,valid_loader, model, criterion, device,is_cla=is_cla)
         start_time = time.time()
 
         # train
+        train_loader.dataset.set_epoch(epoch)
         avg_loss = train_fn(CFG,fold, train_loader, model, criterion, optimizer, epoch, scheduler, device)
 
         # eval
-        _, _,EMB_train = valid_fn(CFG,train_val_loader, model, criterion, device)
-        print(EMB_train.shape)
-        avg_val_loss, predictions,EMB = valid_fn(CFG,valid_loader, model, criterion, device)
+        
+        avg_val_loss, predictions,EMB = valid_fn(CFG,valid_loader, model, criterion, device,is_cla=is_cla)
         
         # scoring
-        score, scores = get_score(valid_labels, predictions)
+        if is_cla:
+            score, scores = get_score_cla(valid_labels, predictions)
+        else:
+            print(valid_labels[0])
+            print(predictions[0])
+            score, scores = get_score(valid_labels, predictions)
 
         elapsed = time.time() - start_time
 
         LOGGER.info(f'Epoch {epoch+1} - avg_train_loss: {avg_loss:.4f}  avg_val_loss: {avg_val_loss:.4f}  time: {elapsed:.0f}s')
         LOGGER.info(f'Epoch {epoch+1} - Score: {score:.4f}  Scores: {scores}')
-        if CFG.wandb:
-            wandb.log({f"[fold{fold}] epoch": epoch+1, 
-                       f"[fold{fold}] avg_train_loss": avg_loss, 
-                       f"[fold{fold}] avg_val_loss": avg_val_loss,
-                       f"[fold{fold}] score": score})
         
         if best_score > score:
+            _, _,EMB_train = valid_fn(CFG,train_val_loader, model, criterion, device)
             best_score = score
             LOGGER.info(f'Epoch {epoch+1} - Save Best Score: {best_score:.4f} Model')
+            if is_pre_train:
+                name = OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{fold}_pre.pth"
+            else:
+                name = OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{fold}_best.pth"
             torch.save({'model': model.state_dict(),
                         'predictions': predictions,
                         'EMB_train_real':EMB_train_real,
@@ -316,11 +341,11 @@ def train_loop(CFG,folds, fold,LOGGER,OUTPUT_DIR):
                         'valid_folds':valid_folds,
                         'train_labels':train_labels,
                         "train_folds":train_folds},
-                        OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{fold}_best.pth")
-
-    predictions = torch.load(OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{fold}_best.pth", 
+                        name)
+    name = 'pre' if is_pre_train else "best"
+    predictions = torch.load(OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{fold}_{name}.pth", 
                              map_location=torch.device('cpu'))['predictions']
-    EMB = torch.load(OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{fold}_best.pth", 
+    EMB = torch.load(OUTPUT_DIR+f"{CFG.model.replace('/', '-')}_fold{fold}_{name}.pth", 
                              map_location=torch.device('cpu'))['EMB']
     valid_folds[[f"pred_{c}" for c in CFG.target_cols]] = predictions
     for i in range(EMB.shape[1]):
