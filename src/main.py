@@ -85,12 +85,8 @@ class CFG:
 if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description='Hate speech')
-    # parser.add_argument('--config', help = 'class from config.py')
-    # parser.add_argument('--sax_csv_path',default= '/sise/liorrk-group/OrDanOfir/eeg/data/dataset_SAX.parquet')
-    # parser.add_argument('--img_csv_path',default= '/sise/liorrk-group/OrDanOfir/eeg/data/img_train.csv')
     parser.add_argument('--model',default='microsoft/deberta-v3-base')
     parser.add_argument('--outputs_dir',default="../outputs_baseline/")
-    # parser.add_argument('--pretrain',default="../outputs_baseline/")
     parser.add_argument('--pretrain_hate',action='store_true')
     parser.add_argument('--back_translation',action='store_true')
     parser.add_argument('--classification',action='store_true')
