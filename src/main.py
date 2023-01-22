@@ -42,10 +42,13 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 import argparse
 from utils import *
 
-def get_result(oof_df):
+def get_result(oof_df,is_cla=False):
     labels = oof_df[CFG.target_cols].values
     preds = oof_df[[f"pred_{c}" for c in CFG.target_cols]].values
-    score, scores = get_score(labels, preds)
+    if is_cla:
+        score, scores = get_score_cla(labels, preds)
+    else:
+        score, scores = get_score(labels, preds)
     LOGGER.info(f'Score: {score:<.4f}  Scores: {scores}')
 
 class CFG:
@@ -57,7 +60,7 @@ class CFG:
     num_workers=6
     model="microsoft/deberta-v3-base"#"Narrativaai/deberta-v3-small-finetuned-hate_speech18"#"microsoft/deberta-v3-base"
     gradient_checkpointing=True
-    scheduler='cosine' # ['linear', 'cosine']
+    scheduler='cosine'
     batch_scheduler=True
     num_cycles=0.5
     num_warmup_steps=0
@@ -85,8 +88,12 @@ class CFG:
 if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description='Hate speech')
+    # parser.add_argument('--config', help = 'class from config.py')
+    # parser.add_argument('--sax_csv_path',default= '/sise/liorrk-group/OrDanOfir/eeg/data/dataset_SAX.parquet')
+    # parser.add_argument('--img_csv_path',default= '/sise/liorrk-group/OrDanOfir/eeg/data/img_train.csv')
     parser.add_argument('--model',default='microsoft/deberta-v3-base')
     parser.add_argument('--outputs_dir',default="../outputs_baseline/")
+    # parser.add_argument('--pretrain',default="../outputs_baseline/")
     parser.add_argument('--pretrain_hate',action='store_true')
     parser.add_argument('--back_translation',action='store_true')
     parser.add_argument('--classification',action='store_true')
@@ -150,9 +157,9 @@ if __name__ == "__main__":
                 _oof_df = train_loop(CFG,train, fold,LOGGER,OUTPUT_DIR,is_pre_train=False,is_cla=args.classification)
                 oof_df = pd.concat([oof_df, _oof_df])
                 LOGGER.info(f"========== fold: {fold} result ==========")
-                get_result(_oof_df)
+                get_result(_oof_df,is_cla=args.classification)
         oof_df = oof_df.reset_index(drop=True)
         LOGGER.info(f"========== CV ==========")
-        get_result(oof_df)
+        get_result(oof_df,is_cla=args.classification)
         oof_df.to_pickle(OUTPUT_DIR+'oof_df.pkl')
     
