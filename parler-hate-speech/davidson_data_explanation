@@ -12,3 +12,5 @@ Each data file contains 5 columns:
   0 - hate speech
   1 - offensive  language
   2 - neither
+
+https://github.com/t-davidson/hate-speech-and-offensive-language/blob/master/data/labeled_data.csv
