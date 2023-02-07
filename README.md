@@ -1,4 +1,6 @@
-# parler-hate-speech
+# parler-hate-speech - Social Network Hate Detection:
+# Finding Social Media Posts Containing Hateful Information
+# Using Ensemble Methods and Back-Translation
 ## Install
 clone our repo
 ```
