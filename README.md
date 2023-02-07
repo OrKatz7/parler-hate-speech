@@ -59,8 +59,24 @@ back_translation.ipynb
 ```
 train
 ```
-train simple NN like Bert, Robereta or Deberta from Hugging Face - train_nn.ipynb
-train all 9 models/exp that we used from Hugging Face - ./run_train.sh
+Toy example - train simple NN like Bert, Robereta or Deberta from Hugging Face - train_nn.ipynb
+```
+full train regression task:
+```
+csv_path = "{datasets}.csv" #change to csv path (csv format #id,text,label_mean)
+model = microsoft/deberta-v3-large #microsoft/deberta-v3-base #microsoft/deberta-v3-small
+python main.py --model $model --outputs_dir ./outputs/toxigen_backtranslate_reg/ --back_translation --pretrain_hate --csv_path $csv_path
+python main.py --model $model --outputs_dir ./outputs/backtranslate_reg/ --back_translation --csv_path $csv_path
+python main.py --model $model --outputs_dir ./outputs/baseline_reg/ --csv_path $csv_path
+```
+
+full train classification task:
+```
+csv_path = "{datasets}.csv" #change to csv path (csv format #id,text,label_mean)
+model = microsoft/deberta-v3-large #microsoft/deberta-v3-base #microsoft/deberta-v3-small
+python main.py --model $model --outputs_dir ./outputs/toxigen_backtranslate_cla/ --back_translation --pretrain_hate --csv_path $csv_path --classification
+python main.py --model $model --outputs_dir ./outputs/backtranslate_cla/ --back_translation --csv_path $csv_path --classification
+python main.py --model $model --outputs_dir ./outputs/baseline_cla/ --csv_path $csv_path --classification
 ```
 stage 2 - train lgbm
 ```
