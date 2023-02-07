@@ -14,8 +14,8 @@ Recent research efforts have been directed to- ward the development of automated
 
 ## results
 ![alt text](docs/results_parler.jpg)
-![alt text](docs/docs/kmeans.jpeg)
-![alt text](docs/docs/docs/loss.jpeg)
+![alt text](docs/kmeans.jpeg)
+![alt text](docs/loss.jpeg)
 
 ## Install
 clone our repo
