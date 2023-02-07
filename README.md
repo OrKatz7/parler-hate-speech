@@ -60,7 +60,7 @@ back_translation.ipynb
 train
 ```
 train simple NN like Bert, Robereta or Deberta from Hugging Face - train_nn.ipynb
-train all 5 models that we used from Hugging Face - ./run_train.sh
+train all 9 models/exp that we used from Hugging Face - ./run_train.sh
 ```
 stage 2 - train lgbm
 ```
