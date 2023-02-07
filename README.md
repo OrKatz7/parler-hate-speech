@@ -12,7 +12,7 @@ Recent research efforts have been directed to- ward the development of automated
 ### Ensemble
 
 ## results
-
+![alt text](docs/results_parler.jpg)
 ## Install
 clone our repo
 ```
