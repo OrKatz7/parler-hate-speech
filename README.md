@@ -1,5 +1,6 @@
-# parler-hate-speech - 
-## Social Network Hate Detection: Finding Social Media Posts Containing Hateful Information Using Ensemble Methods and Back-Translation
+# Social Network Hate Detection: Finding Social Media Posts Containing Hateful Information Using Ensemble Methods and Back-Translation
+Recent research efforts have been directed to- ward the development of automated systems for detecting hateful content to assist social media providers in identifying and removing such con- tent before it can be viewed by the public. This paper introduces a unique ensemble approach that utilizes DeBERTa models, which benefits from pre-training on massive synthetic data and the integration of back-translation techniques during training and testing. Our findings re- veal that this approach delivers state-of-the- art results in hate-speech detection. The re- sults demonstrate that the combination of back- translation, ensemble, and test-time augmen- tation results in a considerable improvement across various metrics and models in both the Parler and GAB datasets. We show that our method reduces models’ bias in an effective and meaningful way, and also reduces the RMSE from 0.838 to around 0.766 and increases R- squared from 0.520 to 0.599. The biggest im- provement was seen in small Deberate models, while for large models, there was either a minor improvement or no change.
+
 ## Install
 clone our repo
 ```
