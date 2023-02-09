@@ -111,13 +111,13 @@ Combining various models and experiments, weaimed to improve prediction accuracy
 </p>
 
 ## Pre-train models
-
+```
 https://huggingface.co/OrK7/parler_hate_speech
-
+```
 ## Logs
-
+```
 https://github.com/OArbili/parler-hate-speech-results
-
+```
 # References
 ```
 https://github.com/naslabbgu/parler-hate-speech
