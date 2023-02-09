@@ -41,6 +41,10 @@ Combining various models and experiments, weaimed to improve prediction accuracy
 
 https://huggingface.co/OrK7/parler_hate_speech
 
+## logs
+
+https://github.com/OArbili/parler-hate-speech-results
+
 ## Install
 clone our repo
 ```
