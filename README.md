@@ -43,14 +43,7 @@ export
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 ```
 ## How To Run
-clasic tf-idf
-```
-train-tfidf.ipynb
-```
-back translation
-```
-back_translation.ipynb
-```
+
 train
 ```
 Toy example - train simple NN like Bert, Robereta or Deberta from Hugging Face - train_nn.ipynb
@@ -75,6 +68,14 @@ python main.py --model $model --outputs_dir ./outputs/baseline_cla/ --csv_path $
 stage 2 - train lgbm
 ```
 train a lgbm model on Hugging Face{Bert,Roberta or Deberta} embeddings - stage2train.ipynb
+```
+clasic tf-idf
+```
+train-tfidf.ipynb
+```
+back translation
+```
+back_translation.ipynb
 ```
 
 ## Summary
