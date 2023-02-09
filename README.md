@@ -43,7 +43,10 @@ export
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 ```
 ## How To Run
-
+demo
+```
+colab_demo.ipynb
+```
 train
 ```
 Toy example - train simple NN like Bert, Robereta or Deberta from Hugging Face - train_nn.ipynb
