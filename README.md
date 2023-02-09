@@ -1,9 +1,7 @@
 # Social Network Hate Detection: Finding Social Media Posts Containing Hateful Information Using Ensemble Methods and Back-Translation
 This repository represents open-source research developed by [Ofir Arbili](https://www.linkedin.com/in/ofir-arbili-82375179/?originalSubdomain=il/), [Dan Presil](https://www.linkedin.com/in/dan-presil-674514152/), [Shvat Messica](https://www.linkedin.com/in/shvatmessica/) and [Or Katz](https://www.linkedin.com/in/or-katz-9ba885114/) for  Ben Gurion University of the Negev NLP and deep learning course
 
-<p align="center" width="100%">
-    <img src="docs/parler_results.jpeg"> 
-</p>
+
 <br>
 <div>
 <a href="https://colab.research.google.com/github/OrKatz7/parler-hate-speech/blob/main/colab_demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab [inference]"></a>
@@ -11,6 +9,11 @@ This repository represents open-source research developed by [Ofir Arbili](https
 <a href="https://huggingface.co/OrK7/parler_hate_speech/"><img src="https://camo.githubusercontent.com/b253a30b83a0724f3f74f3f58236fb49ced8d7b27cb15835c9978b54e444ab08/68747470733a2f2f68756767696e67666163652e636f2f64617461736574732f68756767696e67666163652f646f63756d656e746174696f6e2d696d616765732f7265736f6c76652f6d61696e2f7472616e73666f726d6572735f6c6f676f5f6e616d652e706e67" alt="Open In Hugging Face", width=120></a>
   </div>
   <br>
+  
+  
+<p align="center" width="100%">
+    <img src="docs/parler_results.jpeg"> 
+</p>
   
 
 
