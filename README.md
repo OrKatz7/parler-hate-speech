@@ -6,7 +6,7 @@
 <div>
 <a href="https://colab.research.google.com/github/OrKatz7/parler-hate-speech/blob/main/colab_demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
 <a href="https://www.kaggle.com/code/orkatz2/parler-hate-speech-demo/"><img src="https://kaggle.com/static/images/open-in-kaggle.svg" alt="Open In Kaggle"></a>
-<a href="https://huggingface.co/OrK7/parler_hate_speech/"><img src="https://d3.harvard.edu/platform-digit/wp-content/uploads/sites/2/2022/04/demo-huggingface_optimized-370x200.png" alt="Open In Hugging Face"></a>
+<a href="https://huggingface.co/OrK7/parler_hate_speech/"><img src="https://camo.githubusercontent.com/b253a30b83a0724f3f74f3f58236fb49ced8d7b27cb15835c9978b54e444ab08/68747470733a2f2f68756767696e67666163652e636f2f64617461736574732f68756767696e67666163652f646f63756d656e746174696f6e2d696d616765732f7265736f6c76652f6d61696e2f7472616e73666f726d6572735f6c6f676f5f6e616d652e706e67" alt="Open In Hugging Face"></a>
   </div>
   <br>
   
