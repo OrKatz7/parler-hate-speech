@@ -118,4 +118,8 @@ https://huggingface.co/OrK7/parler_hate_speech
 
 https://github.com/OArbili/parler-hate-speech-results
 
-
+# References
+https://github.com/naslabbgu/parler-hate-speech
+https://osf.io/edua3/
+https://github.com/microsoft/TOXIGEN
+https://github.com/SALT-NLP/implicit-hate
