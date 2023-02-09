@@ -16,49 +16,7 @@ Recent research efforts have been directed toward the development of automated s
     <img src="docs/parler_results.jpeg"> 
 </p>
   
-
-## Pipline
-<p align="center" width="100%">
-    <img src="docs/pipeline.png"> 
-</p>
-
-## Back-Translation
-The process of determining the optimal languages for back-translation involved selecting a set of initial languages and then choosing only the ones can produce most beneficial augmented data for our specific task. First, the original sentences were transformed into different languages. Then, we ran the augmented sentences through a pre-trained model and used embedding techniques to find the distance between the original and the augmented sentences. Finally, the embeddings were used to determine which of the chosen language translations generated sentences that are most similar to the original sentences. The embedding methods that were tested are: PCA, LDA, and t-SNE. After testing these three methods, it was found that tSNE (Figure 2) produced the most accurate results, and was therefore the only method that was used in the final training configuration. This approach was most effective when the language that were initially selected had similar language characteristics and sentence structure
-
-<p align="center" width="100%">
-    <img src="docs/tsne.jpeg"> 
-</p>
-
-## Test Time Augmentation
-We introduced an extra TTA layer to the model. Although TTA can be applied to any form of data, its adoption in NLP has been limited due to the challenge of finding label-preserving transformations. Our back-translation technique was also utilized as a TTA tool. In addition to the original sentence or data, we included all relevant back-translated sentences, filtering out non-related languages us- Figure 3: Parler dataset experiment results. Left: Regression results (RMSE), right: Classification results (AUC) ing the embedding layer (Figure 4). The original sentence was assigned a weight of 0.7, with the remaining weight of 0.3 divided among the included back-translated sentences. During the test we checked which languages allow to get a maximum result and we found the distance range from the source language. The technique allows us to determine which back translations will enter to the TTA per row. for example, In sample 2, it can be seen that the only two language entered into test - the source language and Spanish because all other languages are not within the range. On the other hand, in sample 300, all languages entered the test. In case 900 only 3 languages were chosen while in sample 5 all the reverse translations were very far from the source language which can indicate problems in labeling / sentence such as using multiple emojis or slang language
-
-<p align="center" width="100%">
-    <img src="docs/PCA_2x2.jpeg"> 
-</p>
-
-## Ensemble
-Combining various models and experiments, weaimed to improve prediction accuracy through ensemble methods. This method leverages the strengths of different models, such as diverse linguistic features, and minimizes their limitations/overfitting. Common ensemble techniques in NLP include model averaging, voting, and stacking, and can be applied to tasks like text classification, machine translation, and named entity recognition. The objective of using ensemble methods is to reduce model variance. This study compared three ensemble methods: simple averaging, weighted averaging based on AUC results, and LightGBM using predictions as input. The best performing ensemble method was determined to be simple averaging applied to the dataset
-## Results
-
-<p align="center" width="100%">
-    <img src="docs/results_parler.jpg"> 
-</p>
-<p align="center" width="100%">
-    <img src="docs/kmeans.jpeg"> 
-</p>
-<p align="center" width="100%">
-    <img src="docs/loss.jpeg"> 
-</p>
-
-## pre-train models
-
-https://huggingface.co/OrK7/parler_hate_speech
-
-## logs
-
-https://github.com/OArbili/parler-hate-speech-results
-
-## Install
+ ## Install
 clone our repo
 ```
 git clone https://github.com/OrKatz7/parler-hate-speech
@@ -118,3 +76,46 @@ stage 2 - train lgbm
 ```
 train a lgbm model on Hugging Face{Bert,Roberta or Deberta} embeddings - stage2train.ipynb
 ```
+
+## Pipline
+<p align="center" width="100%">
+    <img src="docs/pipeline.png"> 
+</p>
+
+## Back-Translation
+The process of determining the optimal languages for back-translation involved selecting a set of initial languages and then choosing only the ones can produce most beneficial augmented data for our specific task. First, the original sentences were transformed into different languages. Then, we ran the augmented sentences through a pre-trained model and used embedding techniques to find the distance between the original and the augmented sentences. Finally, the embeddings were used to determine which of the chosen language translations generated sentences that are most similar to the original sentences. The embedding methods that were tested are: PCA, LDA, and t-SNE. After testing these three methods, it was found that tSNE (Figure 2) produced the most accurate results, and was therefore the only method that was used in the final training configuration. This approach was most effective when the language that were initially selected had similar language characteristics and sentence structure
+
+<p align="center" width="100%">
+    <img src="docs/tsne.jpeg"> 
+</p>
+
+## Test Time Augmentation
+We introduced an extra TTA layer to the model. Although TTA can be applied to any form of data, its adoption in NLP has been limited due to the challenge of finding label-preserving transformations. Our back-translation technique was also utilized as a TTA tool. In addition to the original sentence or data, we included all relevant back-translated sentences, filtering out non-related languages us- Figure 3: Parler dataset experiment results. Left: Regression results (RMSE), right: Classification results (AUC) ing the embedding layer (Figure 4). The original sentence was assigned a weight of 0.7, with the remaining weight of 0.3 divided among the included back-translated sentences. During the test we checked which languages allow to get a maximum result and we found the distance range from the source language. The technique allows us to determine which back translations will enter to the TTA per row. for example, In sample 2, it can be seen that the only two language entered into test - the source language and Spanish because all other languages are not within the range. On the other hand, in sample 300, all languages entered the test. In case 900 only 3 languages were chosen while in sample 5 all the reverse translations were very far from the source language which can indicate problems in labeling / sentence such as using multiple emojis or slang language
+
+<p align="center" width="100%">
+    <img src="docs/PCA_2x2.jpeg"> 
+</p>
+
+## Ensemble
+Combining various models and experiments, weaimed to improve prediction accuracy through ensemble methods. This method leverages the strengths of different models, such as diverse linguistic features, and minimizes their limitations/overfitting. Common ensemble techniques in NLP include model averaging, voting, and stacking, and can be applied to tasks like text classification, machine translation, and named entity recognition. The objective of using ensemble methods is to reduce model variance. This study compared three ensemble methods: simple averaging, weighted averaging based on AUC results, and LightGBM using predictions as input. The best performing ensemble method was determined to be simple averaging applied to the dataset
+## Results
+
+<p align="center" width="100%">
+    <img src="docs/results_parler.jpg"> 
+</p>
+<p align="center" width="100%">
+    <img src="docs/kmeans.jpeg"> 
+</p>
+<p align="center" width="100%">
+    <img src="docs/loss.jpeg"> 
+</p>
+
+## pre-train models
+
+https://huggingface.co/OrK7/parler_hate_speech
+
+## logs
+
+https://github.com/OArbili/parler-hate-speech-results
+
+
