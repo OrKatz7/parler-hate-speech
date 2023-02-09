@@ -9,16 +9,13 @@ This repository represents open-source research developed by [Ofir Arbili](https
 <a href="https://huggingface.co/OrK7/parler_hate_speech/"><img src="https://camo.githubusercontent.com/b253a30b83a0724f3f74f3f58236fb49ced8d7b27cb15835c9978b54e444ab08/68747470733a2f2f68756767696e67666163652e636f2f64617461736574732f68756767696e67666163652f646f63756d656e746174696f6e2d696d616765732f7265736f6c76652f6d61696e2f7472616e73666f726d6572735f6c6f676f5f6e616d652e706e67" alt="Open In Hugging Face", width=120></a>
   </div>
   <br>
-  
-  
+
+Recent research efforts have been directed toward the development of automated systems for detecting hateful content to assist social media providers in identifying and removing such content before it can be viewed by the public. This paper introduces a unique ensemble approach that utilizes DeBERTa models, which benefits from pre-training on massive synthetic data and the integration of back-translation techniques during training and testing. Our findings reveal that this approach delivers state-of-the-art results in hate-speech detection. The results demonstrate that the combination of back-translation, ensemble, and test-time augmentation results in a considerable improvement across various metrics and models in both the Parler and GAB datasets. We show that our method reduces models’ bias in an effective and meaningful way, and also reduces the RMSE from 0.838 to around 0.766 and increases R-squared from 0.520 to 0.599. The biggest improvement was seen in small Deberate models, while for large models, there was either a minor improvement or no change.
+
 <p align="center" width="100%">
     <img src="docs/parler_results.jpeg"> 
 </p>
   
-
-
-  
-Recent research efforts have been directed toward the development of automated systems for detecting hateful content to assist social media providers in identifying and removing such content before it can be viewed by the public. This paper introduces a unique ensemble approach that utilizes DeBERTa models, which benefits from pre-training on massive synthetic data and the integration of back-translation techniques during training and testing. Our findings reveal that this approach delivers state-of-the-art results in hate-speech detection. The results demonstrate that the combination of back-translation, ensemble, and test-time augmentation results in a considerable improvement across various metrics and models in both the Parler and GAB datasets. We show that our method reduces models’ bias in an effective and meaningful way, and also reduces the RMSE from 0.838 to around 0.766 and increases R-squared from 0.520 to 0.599. The biggest improvement was seen in small Deberate models, while for large models, there was either a minor improvement or no change.
 
 ## Pipline
 <p align="center" width="100%">
