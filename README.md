@@ -5,7 +5,6 @@
 <br>
 <div>
 <a href="https://colab.research.google.com/github/OrKatz7/parler-hate-speech/blob/main/colab_demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
-
 <a href="https://www.kaggle.com/code/orkatz2/parler-hate-speech-demo/"><img src="https://kaggle.com/static/images/open-in-kaggle.svg" alt="Open In Kaggle"></a>
   </div>
   <br>
