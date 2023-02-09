@@ -37,6 +37,7 @@ Combining various models and experiments, weaimed to improve prediction accuracy
     <img src="docs/loss.jpeg"> 
 </p>
 ## pre-train models
+
 https://huggingface.co/OrK7/parler_hate_speech
 
 ## Install
