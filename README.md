@@ -1,4 +1,6 @@
 # Social Network Hate Detection: Finding Social Media Posts Containing Hateful Information Using Ensemble Methods and Back-Translation
+This repository represents open-source research developed by [Ofir Arbili](https://www.linkedin.com/in/ofir-arbili-82375179/?originalSubdomain=il/), [Dan Presil](https://www.linkedin.com/in/dan-presil-674514152/), [Shvat Messica](https://www.linkedin.com/in/shvatmessica/) and [Or Katz](https://www.linkedin.com/in/or-katz-9ba885114/) for  Ben Gurion University of the Negev machine learning course
+
 <p align="center" width="100%">
     <img src="docs/parler_results.jpeg"> 
 </p>
