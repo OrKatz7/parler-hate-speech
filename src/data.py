@@ -49,8 +49,7 @@ def prepare_input(cfg, text):
 
 
 class TrainDataset(Dataset):
-    def __init__(self, cfg, df,BackTranslation = None,stop_BackTranslation_epcoh = 3,train_transforms=None,gpt_type = ['ada','babbage']):
-        
+    def __init__(self, cfg, df,BackTranslation = None,stop_BackTranslation_epcoh = 3,train_transforms=None,gpt_type = None):
         self.cfg = cfg
         df = df.fillna("-9999")
         self.df = df
