@@ -94,12 +94,17 @@ if __name__ == "__main__":
     parser.add_argument('--pretrain_hate',action='store_true')
     parser.add_argument('--back_translation',action='store_true')
     parser.add_argument('--classification',action='store_true')
+    parser.add_argument('--gpt',action='store_true')
+    
     
     args = parser.parse_args()
     CFG.model = args.model
+    if args.classification:
+        CFG.target_cols=['label_mean','HD', 'CV', 'VO','REL', 'RAE', 'SXO', 'GEN', 'IDL', 'NAT', 'POL', 'MPH', 'EX', 'IM']
     if CFG.model == 'microsoft/deberta-v2-xlarge':
         CFG.batch_size = 4
     CFG.back_translation = args.back_translation
+    CFG.gpt = args.gpt
     print(CFG.model)
     OUTPUT_DIR = args.outputs_dir +"/" + CFG.model.replace("/",".")+"/"
     if not os.path.exists(OUTPUT_DIR):
