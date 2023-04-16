@@ -49,7 +49,7 @@ def prepare_input(cfg, text):
 
 
 class TrainDataset(Dataset):
-    def __init__(self, cfg, df,BackTranslation = None,stop_BackTranslation_epcoh = 3,train_transforms=None):
+    def __init__(self, cfg, df,BackTranslation = None,stop_BackTranslation_epcoh = 3,train_transforms=None,gpt_type = ['ada','babbage']):
         
         self.cfg = cfg
         df = df.fillna("-9999")
@@ -57,6 +57,8 @@ class TrainDataset(Dataset):
         self.texts = df['text'].values
         if BackTranslation is not None:
             self.texts_bt = [df[f'BackTranslation_{row}'].values for row in BackTranslation]
+            if gpt_type is not None:
+                 self.texts_bt = self.texts_bt + [df[f'gpt_{row}'].values for row in gpt_type]
         else:
             self.texts_bt = None
         self.labels = df[cfg.target_cols].values
