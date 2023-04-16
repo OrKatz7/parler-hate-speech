@@ -55,12 +55,14 @@ class TrainDataset(Dataset):
         df = df.fillna("-9999")
         self.df = df
         self.texts = df['text'].values
+        self.texts_bt = []
         if BackTranslation is not None:
-            self.texts_bt = [df[f'BackTranslation_{row}'].values for row in BackTranslation]
-            if gpt_type is not None:
-                 self.texts_bt = self.texts_bt + [df[f'gpt_{row}'].values for row in gpt_type]
-        else:
+            self.texts_bt = self.texts_bt + [df[f'BackTranslation_{row}'].values for row in BackTranslation]
+        if gpt_type is not None:
+            self.texts_bt = self.texts_bt + [df[f'gpt_{row}'].values for row in gpt_type]
+        if len(self.texts_bt)==0:
             self.texts_bt = None
+            
         self.labels = df[cfg.target_cols].values
         self.epoch = 0
         self.stop_BackTranslation_epcoh = stop_BackTranslation_epcoh
