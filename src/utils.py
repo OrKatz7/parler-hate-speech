@@ -230,10 +230,12 @@ def train_loop(CFG,folds, fold,LOGGER,OUTPUT_DIR,is_pre_train=False,is_cla = Fal
     valid_folds = folds[folds['fold'] == fold].reset_index(drop=True)
     valid_labels = valid_folds[CFG.target_cols].values
     train_labels = train_folds[CFG.target_cols].values
-    BackTranslation = ['de','es','fr'] if not is_pre_train and CFG.back_translation else None #,'fr','es','nl','no'
+    BackTranslation = []#['de','es','fr'] if not is_pre_train and CFG.back_translation else None #,'fr','es','nl','no'
     LOGGER.info(f"BackTranslation {BackTranslation}")
     
-    train_dataset = TrainDataset(CFG, train_folds , BackTranslation = BackTranslation , stop_BackTranslation_epcoh = 3,train_transforms = get_train_transforms())
+    train_dataset = TrainDataset(CFG, train_folds , BackTranslation = BackTranslation , 
+                                 stop_BackTranslation_epcoh = 3,train_transforms = get_train_transforms(),gpt_type = ['ada','babbage'] if CFG.gpt else None)
+    
     train_dataset2 = TrainDataset(CFG, train_folds , BackTranslation = None , stop_BackTranslation_epcoh = 0)
     valid_dataset = TrainDataset(CFG, valid_folds , BackTranslation = None , stop_BackTranslation_epcoh = 0)
 
