@@ -1,5 +1,5 @@
-# Social Network Hate Detection: Finding Social Media Posts Containing Hateful Information Using Ensemble Methods and Back-Translation
-This repository represents open-source research developed by [Ofir Arbili](https://www.linkedin.com/in/ofir-arbili-82375179/?originalSubdomain=il/), [Dan Presil](https://www.linkedin.com/in/dan-presil-674514152/), [Shvat Messica](https://www.linkedin.com/in/shvatmessica/) and [Or Katz](https://www.linkedin.com/in/or-katz-9ba885114/)
+# Enhancing Social Network Hate Detection Using Back Translation and GPT-3 Augmentations During Training and Test-Time
+This repository represents open-source research developed by [Ofir Arbili](https://www.linkedin.com/in/ofir-arbili-82375179/?originalSubdomain=il/), [Dan Presil](https://www.linkedin.com/in/dan-presil-674514152/), [Shvat Messica](https://www.linkedin.com/in/shvatmessica/), [Or Katz](https://www.linkedin.com/in/or-katz-9ba885114/) and [Seffi Cohen](https://www.linkedin.com/in/seffi-cohen-11182046/)
 
 
 <br>
@@ -10,7 +10,7 @@ This repository represents open-source research developed by [Ofir Arbili](https
   </div>
   <br>
 
-Recent research efforts have been directed toward the development of automated systems for detecting hateful content to assist social media providers in identifying and removing such content before it can be viewed by the public. This paper introduces a unique ensemble approach that utilizes DeBERTa models, which benefits from pre-training on massive synthetic data and the integration of back-translation techniques during training and testing. Our findings reveal that this approach delivers state-of-the-art results in hate-speech detection. The results demonstrate that the combination of back-translation, ensemble, and test-time augmentation results in a considerable improvement across various metrics and models in both the Parler and GAB datasets. We show that our method reduces models’ bias in an effective and meaningful way, and also reduces the RMSE from 0.838 to around 0.766 and increases R-squared from 0.520 to 0.599. The biggest improvement was seen in small Deberate models, while for large models, there was either a minor improvement or no change.
+Social media platforms have become an essential means of communication, but they also serve as a breeding ground for hateful content. Detecting hate speech accurately is challenging due to factors such as slang and implicit hate speech. In response to these challenges, this paper presents a novel ensemble approach utilizing DeBERTa models, integrating back-translation and GPT-3 augmentation techniques during both training and test time. This method aims to address the complexities associated with detecting hate speech, resulting in more robust and accurate results. Our findings indicate that the proposed approach significantly enhances hate speech detection performance across various metrics and models in both the Parler and GAB datasets.
 
 <p align="center" width="100%">
     <img src="docs/parler_results.jpeg"> 
