@@ -11,10 +11,6 @@ This repository represents open-source research developed by [Ofir Arbili](https
   <br>
 
 Social media platforms have become an essential means of communication, but they also serve as a breeding ground for hateful content. Detecting hate speech accurately is challenging due to factors such as slang and implicit hate speech. In response to these challenges, this paper presents a novel ensemble approach utilizing DeBERTa models, integrating back-translation and GPT-3 augmentation techniques during both training and test time. This method aims to address the complexities associated with detecting hate speech, resulting in more robust and accurate results. Our findings indicate that the proposed approach significantly enhances hate speech detection performance across various metrics and models in both the Parler and GAB datasets.
-
-<p align="center" width="100%">
-    <img src="docs/parler_results.jpeg"> 
-</p>
   
  ## Install
 clone our repo
@@ -104,9 +100,7 @@ We introduced an extra TTA layer to the model. Although TTA can be applied to an
 Combining various models and experiments, weaimed to improve prediction accuracy through ensemble methods. This method leverages the strengths of different models, such as diverse linguistic features, and minimizes their limitations/overfitting. Common ensemble techniques in NLP include model averaging, voting, and stacking, and can be applied to tasks like text classification, machine translation, and named entity recognition. The objective of using ensemble methods is to reduce model variance. This study compared three ensemble methods: simple averaging, weighted averaging based on AUC results, and LightGBM using predictions as input. The best performing ensemble method was determined to be simple averaging applied to the dataset
 ## Results
 
-<p align="center" width="100%">
-    <img src="docs/results_parler.jpg"> 
-</p>
+
 <p align="center" width="100%">
     <img src="docs/kmeans.jpeg"> 
 </p>
