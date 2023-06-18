@@ -1,7 +1,7 @@
 # Enhancing Social Network Hate Detection Using Back Translation and GPT-3 Augmentations During Training and Test-Time
 This repository represents open-source research developed by [Ofir Arbili](https://www.linkedin.com/in/ofir-arbili-82375179/?originalSubdomain=il/), [Dan Presil](https://www.linkedin.com/in/dan-presil-674514152/), [Shvat Messica](https://www.linkedin.com/in/shvatmessica/), [Or Katz](https://www.linkedin.com/in/or-katz-9ba885114/) and [Seffi Cohen](https://www.linkedin.com/in/seffi-cohen-11182046/)
 
-
+[Paper](https://www.sciencedirect.com/science/article/abs/pii/S1566253523002038)
 <br>
 <div>
 <a href="https://colab.research.google.com/github/OrKatz7/parler-hate-speech/blob/main/colab_demo.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab [inference]"></a>
@@ -123,3 +123,5 @@ https://osf.io/edua3/
 https://github.com/microsoft/TOXIGEN
 https://github.com/SALT-NLP/implicit-hate
 ```
+# Cite
+Cohen S, Presil D, Katz O, Arbili O, Messica S, Rokach L. Enhancing social network hate detection using back translation and GPT-3 augmentations during training and test-time. Information Fusion. 2023 Jun 13:101887. 
